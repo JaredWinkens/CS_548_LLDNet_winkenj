@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan 22 20:06:30 2022
-
-@author: USER
-"""
-
-
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Dec 27 10:25:25 2021
+Created on Sat Nov 23 13:47:25 2024
 
 @author: Jared Winkens
 """
@@ -78,7 +70,7 @@ class Lanes():
 
 
 
-video_capture = cv2.VideoCapture("vid_2.mp4")
+video_capture = cv2.VideoCapture("vids/input/vid_4.mp4")
 
 video_capture.set(3, 640)
 video_capture.set(4, 480)
@@ -87,19 +79,15 @@ fps = video_capture.get(cv2.CAP_PROP_FPS)
 
      
 fourcc=cv2.VideoWriter_fourcc(*'XVID')
-out=cv2.VideoWriter('j.avi' , fourcc , 20.0 , (640,480))
+out=cv2.VideoWriter('vids/predicted/j.avi' , fourcc , 20.0 , (640,480))
 count = 0
 time_taken = []
 
 
-    
 while(video_capture.isOpened()):
    lanes = Lanes()
-
-
- 
-
-    # Capture the frames
+   
+   # Capture the frames
    ret,image = video_capture.read()
    if not ret:
        print("Can't receive frame (stream end?). Exiting ...")
@@ -120,30 +108,19 @@ while(video_capture.isOpened()):
         print(fps)
           
         lanes.recent_fit.append(prediction)
-     # Only using last five for average
+        # Only using last five for average
         if len(lanes.recent_fit) > 5:
             lanes.recent_fit = lanes.recent_fit[1:]
 
-    # Calculate average detection
+        # Calculate average detection
         lanes.avg_fit = np.mean(np.array([i for i in lanes.recent_fit]), axis = 0)
 
-    # Generate fake R & B color dimensions, stack with G
+        # Generate fake R & B color dimensions, stack with G
         blanks = np.zeros_like(lanes.avg_fit).astype(np.uint8)
         lane_drawn = np.dstack((blanks, lanes.avg_fit, blanks))
 
-    # Re-size to match the original image
+        # Re-size to match the original image
         lane_image = cv2.resize(lane_drawn, (640,480))
-           
-          
-   
-  
-
-   
-
- 
-               
-   
-   
         image = cv2.resize(image, (640,480))
         lane_image = lane_image.astype(np.uint8)
 
@@ -152,21 +129,9 @@ while(video_capture.isOpened()):
         out.write(result)
         cv2.imshow('r',result)
            
-  
-  
         if cv2.waitKey(1) & 0xFF == ord('q'):
-
             break
-       
-             
-    
-       
-
-   
-   
-    
-
-
+        
 video_capture.release()
 out.release()
 cv2.destroyAllWindows()
