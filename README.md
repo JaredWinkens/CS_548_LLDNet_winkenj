@@ -1,3 +1,66 @@
+# This is a fork created for a CS 548 class project at SUNY Polytechnic Institute
+
+**Team Members:** Jared Winkens
+
+## Setup
+
+1. Clone this repo
+```
+git clone https://github.com/JaredWinkens/CS_548_LLDNet_winkenj.git
+```
+
+2. Create a virtual environment with `Python 3.6.13` and install the required packages.
+    - `Keras 2.6.0`
+    - `OpenCV 4.10.0.84`
+    - `Tensorflow 2.10.1`
+    - `Sklearn 1.5.2`
+    - `Pandas 2.2.3`
+    - `Numpy 1.26.4`
+    - `Matplotlib 3.9.2`
+
+3. Download the training dataset images and labels from the links below
+    
+    ***Make sure to add them to your local repo where the heirarchy is as follows: `CS_548_LLDNET_WINKENJ/data/images_mixed.npy` & `CS_548_LLDNET_WINKENJ/data/labels_mixed.npy`***
+
+    Images: https://drive.google.com/file/d/1S23Ac0_hbOktV0rE2q0IkQWpQjUfkMTB/view?usp=sharing 
+    
+    Labels: https://drive.google.com/file/d/1I264WVBL3Dyp_4PTfEYkVIDkg_Yn5gJJ/view?usp=sharing
+
+4. Download the test videos from the link below
+    
+    ***Make sure to add the folder to the root directory of your local repo: `CS_548_LLDNET_WINKENJ/vids/`***
+    
+    Test videos: https://drive.google.com/drive/folders/12P33jY8AijRAunk7o-nMXzxVoN4xd5v9?usp=sharing
+
+## Experiment 1
+
+1. Follow steps **1 - 4** in **Setup** above (if not already done)
+
+2. To get the quantitative results of the experiment, run each of the steps in `LLDNet.ipynb`
+    
+    ***Make sure to change any hardcoded paths to your own paths***
+
+3. To get the qualitative results of the experiment:
+    - Open `Lane_detection.py`
+    - Change the path in `video_capture = cv2.VideoCapture("vids/input/vid_0.mp4")` to whatever video you want to test.
+    - Run `Lane_detection.py`
+    - You can find the ouput video in `CS_548_LLDNET_WINKENJ/vids/predicted/j.avi`
+
+## Experiment 2
+
+1. Follow steps **1 - 4** in **Setup** above (if not already done)
+
+2. To get the quantitative results of the experiment, run each of the steps in `LLDNet_Experiment_2.ipynb`
+    
+    ***Make sure to change any hardcoded paths to your own paths***
+
+3. To get the qualitative results of the experiment:
+    - Open `Lane_detection.py`
+    - Change the path in `model = load_model('LLDNet.h5', ...)` to `'LLDNet_Experiment_2.h5'`
+    - Change the path in `video_capture = cv2.VideoCapture("vids/input/vid_0.mp4")` to whatever video you want to test.
+    - Run `Lane_detection.py`
+    - You can find the ouput video in `CS_548_LLDNET_WINKENJ/vids/predicted/j.avi`
+
 # LLDNet: A Lightweight Lane Detection Approach for Autonomous Cars Using Deep Learning
 
 This is the source code of LLDNet: A Lightweight Lane Detection Approach for Autonomous Cars Using Deep Learning. We provide the dataset, model development code, test code and the pretrained model.

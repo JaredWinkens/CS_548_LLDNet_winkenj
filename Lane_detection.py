@@ -70,7 +70,7 @@ class Lanes():
 
 
 
-video_capture = cv2.VideoCapture("vids/input/vid_4.mp4")
+video_capture = cv2.VideoCapture("vids/input/vid_0.mp4") # replace the string with the path to your video file
 
 video_capture.set(3, 640)
 video_capture.set(4, 480)
